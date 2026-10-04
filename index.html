@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#0b0b0f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Glow Up Kiosk" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <title>Glow Up Mix Comparator</title>
+  <style>
+    :root{
+      --bg:#0a0a0d;
+      --panel:#121218;
+      --muted:#8c8c98;
+      --text:#f5f5f7;
+      --accent:#b8ff3d;
+      --accent2:#7f5cff;
+      --line:rgba(255,255,255,.12);
+      --shadow:0 30px 80px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;overflow:hidden}
+    body{touch-action:none;overscroll-behavior:none}
+    .app{
+      height:100dvh;
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      padding:max(24px, env(safe-area-inset-top)) 28px max(24px, env(safe-area-inset-bottom));
+      background:
+        radial-gradient(circle at 20% 10%, rgba(127,92,255,.18), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(184,255,61,.12), transparent 30%),
+        var(--bg);
+    }
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.02em}
+    .logo{
+      width:42px;height:42px;border-radius:13px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent),#fff);
+      color:#090909;font-weight:950;box-shadow:0 10px 30px rgba(184,255,61,.16)
+    }
+    .tag{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
+    .hero{display:grid;place-items:center}
+    .card{
+      width:min(980px,100%);
+      background:rgba(18,18,24,.78);
+      border:1px solid var(--line);
+      border-radius:34px;
+      box-shadow:var(--shadow);
+      padding:34px;
+      backdrop-filter:blur(18px);
+    }
+    h1{font-size:clamp(34px,6vw,74px);line-height:.95;margin:0 0 14px;letter-spacing:-.045em}
+    .sub{font-size:clamp(16px,2.2vw,22px);color:#b9bac3;margin:0 0 30px}
+    .meter-wrap{
+      position:relative;height:260px;border-radius:28px;overflow:hidden;
+      border:1px solid var(--line);background:#09090c;user-select:none
+    }
+    .side{
+      position:absolute;inset:0;
+      display:flex;align-items:center;padding:28px;
+      pointer-events:none
+    }
+    .before{
+      justify-content:flex-start;
+      background:linear-gradient(90deg,rgba(127,92,255,.20),transparent 60%)
+    }
+    .after{
+      justify-content:flex-end;
+      background:linear-gradient(270deg,rgba(184,255,61,.18),transparent 60%)
+    }
+    .side strong{font-size:clamp(28px,6vw,62px);letter-spacing:-.03em}
+    .side small{display:block;margin-top:6px;color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+    .divider{
+      position:absolute;top:0;bottom:0;left:50%;width:4px;transform:translateX(-50%);
+      background:white;box-shadow:0 0 30px rgba(255,255,255,.7)
+    }
+    .handle{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:74px;height:74px;border-radius:50%;background:#fff;color:#111;
+      display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:0 12px 40px rgba(0,0,0,.45)
+    }
+    .hint{text-align:center;color:var(--muted);font-size:14px;margin:16px 0 0}
+    .controls{display:flex;justify-content:center;margin-top:26px}
+    button{
+      border:0;border-radius:999px;padding:18px 30px;font-size:18px;font-weight:800;cursor:pointer
+    }
+    #play{min-width:210px;background:var(--text);color:#0b0b0f}
+    #play.playing{background:var(--accent);color:#0b0b0f}
+    .status{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;color:var(--muted);font-size:13px
+    }
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03)}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+    @media (max-width:700px){
+      .app{padding-left:18px;padding-right:18px}
+      .card{padding:22px;border-radius:26px}
+      .meter-wrap{height:300px}
+      .side{padding:20px}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">GU</div>
+        <div>
+          <div>GLOW UP</div>
+          <div class="tag">Music Studio</div>
+        </div>
+      </div>
+      <div class="pill"><span class="dot"></span> Kiosk demo</div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1>Senti la differenza.</h1>
+        <p class="sub">Premi play e trascina il cursore tra una versione “before” e una “after”.</p>
+
+        <div id="compare" class="meter-wrap" aria-label="Comparatore audio before after">
+          <div class="side before"><div><strong>BEFORE</strong><small>Più grezzo</small></div></div>
+          <div class="side after"><div><strong>AFTER</strong><small>Più definito</small></div></div>
+          <div id="divider" class="divider"></div>
+          <div id="handle" class="handle">↔</div>
+        </div>
+
+        <div class="hint">Trascina con un dito. A sinistra ascolti BEFORE, a destra AFTER.</div>
+
+        <div class="controls">
+          <button id="play" type="button">▶ Avvia demo</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="status">
+      <span>Prototype 01 · Audio generato in tempo reale</span>
+      <span id="mixLabel">50% BEFORE · 50% AFTER</span>
+    </footer>
+  </main>
+
+<script>
+(() => {
+  const compare = document.getElementById('compare');
+  const divider = document.getElementById('divider');
+  const handle = document.getElementById('handle');
+  const playBtn = document.getElementById('play');
+  const mixLabel = document.getElementById('mixLabel');
+
+  let ctx = null;
+  let master = null;
+  let beforeGain = null;
+  let afterGain = null;
+  let isPlaying = false;
+  let timers = [];
+  let mix = .5;
+
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+  function setMix(v){
+    mix = clamp(v, 0, 1);
+    const pct = mix * 100;
+    divider.style.left = pct + '%';
+    handle.style.left = pct + '%';
+    mixLabel.textContent = `${Math.round((1-mix)*100)}% BEFORE · ${Math.round(mix*100)}% AFTER`;
+
+    if (ctx && beforeGain && afterGain) {
+      const t = ctx.currentTime;
+      // equal-power crossfade
+      const a = Math.cos(mix * 0.5 * Math.PI);
+      const b = Math.cos((1.0 - mix) * 0.5 * Math.PI);
+      beforeGain.gain.cancelScheduledValues(t);
+      afterGain.gain.cancelScheduledValues(t);
+      beforeGain.gain.linearRampToValueAtTime(a, t + 0.03);
+      afterGain.gain.linearRampToValueAtTime(b, t + 0.03);
+    }
+  }
+
+  function updateFromPointer(e){
+    const r = compare.getBoundingClientRect();
+    setMix((e.clientX - r.left) / r.width);
+  }
+
+  let dragging = false;
+  compare.addEventListener('pointerdown', e => {
+    dragging = true;
+    compare.setPointerCapture?.(e.pointerId);
+    updateFromPointer(e);
+  });
+  compare.addEventListener('pointermove', e => {
+    if (dragging) updateFromPointer(e);
+  });
+  compare.addEventListener('pointerup', () => dragging = false);
+  compare.addEventListener('pointercancel', () => dragging = false);
+
+  function createVoice(freq, start, duration, destination, polished){
+    const osc = ctx.createOscillator();
+    const env = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    osc.type = polished ? 'sawtooth' : 'square';
+    osc.frequency.value = freq;
+
+    filter.type = 'lowpass';
+    filter.frequency.value = polished ? 5200 : 1400;
+    filter.Q.value = polished ? 0.8 : 2.4;
+
+    env.gain.setValueAtTime(0.0001, start);
+    env.gain.exponentialRampToValueAtTime(polished ? 0.18 : 0.12, start + 0.015);
+    env.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+    osc.connect(filter);
+    filter.connect(env);
+    env.connect(destination);
+    osc.start(start);
+    osc.stop(start + duration + .05);
+  }
+
+  function addKick(start, destination, polished){
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(polished ? 145 : 105, start);
+    osc.frequency.exponentialRampToValueAtTime(48, start + .12);
+    g.gain.setValueAtTime(polished ? .65 : .42, start);
+    g.gain.exponentialRampToValueAtTime(.001, start + .20);
+    osc.connect(g).connect(destination);
+    osc.start(start);
+    osc.stop(start + .22);
+  }
+
+  function scheduleLoop(){
+    if (!isPlaying) return;
+    const base = ctx.currentTime + .05;
+    const beat = .42;
+    const notes = [220, 261.63, 293.66, 329.63, 293.66, 261.63, 196, 220];
+
+    for(let i=0;i<8;i++){
+      const t = base + i*beat;
+      createVoice(notes[i], t, beat*.82, beforeGain, false);
+      createVoice(notes[i], t, beat*.90, afterGain, true);
+
+      if(i % 2 === 0){
+        addKick(t, beforeGain, false);
+        addKick(t, afterGain, true);
+      }
+    }
+
+    timers.push(setTimeout(scheduleLoop, beat*8*1000 - 120));
+  }
+
+  async function startAudio(){
+    if(!ctx){
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain();
+      master.gain.value = .42;
+
+      beforeGain = ctx.createGain();
+      afterGain = ctx.createGain();
+
+      // "After" gets subtle compression for audible contrast.
+      const comp = ctx.createDynamicsCompressor();
+      comp.threshold.value = -20;
+      comp.knee.value = 18;
+      comp.ratio.value = 3.5;
+      comp.attack.value = .005;
+      comp.release.value = .18;
+
+      beforeGain.connect(master);
+      afterGain.connect(comp).connect(master);
+      master.connect(ctx.destination);
+
+      setMix(mix);
+    }
+
+    if(ctx.state === 'suspended') await ctx.resume();
+
+    isPlaying = true;
+    playBtn.textContent = '■ Ferma demo';
+    playBtn.classList.add('playing');
+    scheduleLoop();
+  }
+
+  function stopAudio(){
+    isPlaying = false;
+    timers.forEach(clearTimeout);
+    timers = [];
+    if(master){
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(.0001, t+.06);
+      setTimeout(() => { if(master) master.gain.value = .42; }, 90);
+    }
+    playBtn.textContent = '▶ Avvia demo';
+    playBtn.classList.remove('playing');
+  }
+
+  playBtn.addEventListener('click', async () => {
+    if(isPlaying) stopAudio();
+    else await startAudio();
+  });
+
+  setMix(.5);
+})();
+</script>
+</body>
+</html>

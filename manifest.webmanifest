@@ -1,0 +1,8 @@
+{
+  "name": "Glow Up Mix Comparator",
+  "short_name": "Glow Up Kiosk",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0d",
+  "theme_color": "#0a0a0d"
+}
