@@ -1,311 +1,229 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
-  <meta name="theme-color" content="#0b0b0f" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Glow Up Kiosk" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <title>Glow Up Mix Comparator</title>
-  <style>
-    :root{
-      --bg:#0a0a0d;
-      --panel:#121218;
-      --muted:#8c8c98;
-      --text:#f5f5f7;
-      --accent:#b8ff3d;
-      --accent2:#7f5cff;
-      --line:rgba(255,255,255,.12);
-      --shadow:0 30px 80px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;overflow-x:hidden;overflow-y:auto}
-    body{touch-action:manipulation;overscroll-behavior-x:none;-webkit-text-size-adjust:100%}
-    .app{
-      min-height:100dvh;
-      height:auto;
-      display:grid;
-      grid-template-rows:auto 1fr auto;
-      padding:max(24px, env(safe-area-inset-top)) 28px max(24px, env(safe-area-inset-bottom));
-      background:
-        radial-gradient(circle at 20% 10%, rgba(127,92,255,.18), transparent 28%),
-        radial-gradient(circle at 85% 80%, rgba(184,255,61,.12), transparent 30%),
-        var(--bg);
-    }
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:14px;font-weight:800;letter-spacing:.02em}
-    .logo{
-      width:58px;height:58px;border-radius:50%;overflow:hidden;
-      display:block;flex:0 0 auto;
-      box-shadow:0 10px 30px rgba(0,0,0,.28)
-    }
-    .logo img{width:100%;height:100%;display:block;object-fit:cover}
-    .tag{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
-    .hero{display:grid;place-items:center;padding:24px 0}
-    .card{
-      width:min(980px,100%);
-      background:rgba(18,18,24,.78);
-      border:1px solid var(--line);
-      border-radius:34px;
-      box-shadow:var(--shadow);
-      padding:34px;
-      backdrop-filter:blur(18px);
-    }
-    h1{font-size:clamp(34px,6vw,74px);line-height:.95;margin:0 0 14px;letter-spacing:-.045em}
-    .sub{font-size:clamp(16px,2.2vw,22px);color:#b9bac3;margin:0 0 30px}
-    .meter-wrap{
-      position:relative;height:260px;border-radius:28px;overflow:hidden;
-      border:1px solid var(--line);background:#09090c;user-select:none;touch-action:none
-    }
-    .side{
-      position:absolute;inset:0;
-      display:flex;align-items:center;padding:28px;
-      pointer-events:none
-    }
-    .before{
-      justify-content:flex-start;
-      background:linear-gradient(90deg,rgba(127,92,255,.20),transparent 60%)
-    }
-    .after{
-      justify-content:flex-end;
-      background:linear-gradient(270deg,rgba(184,255,61,.18),transparent 60%)
-    }
-    .side strong{font-size:clamp(28px,6vw,62px);letter-spacing:-.03em}
-    .side small{display:block;margin-top:6px;color:var(--muted);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
-    .divider{
-      position:absolute;top:0;bottom:0;left:50%;width:4px;transform:translateX(-50%);
-      background:white;box-shadow:0 0 30px rgba(255,255,255,.7)
-    }
-    .handle{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:74px;height:74px;border-radius:50%;background:#fff;color:#111;
-      display:grid;place-items:center;font-weight:900;font-size:24px;box-shadow:0 12px 40px rgba(0,0,0,.45)
-    }
-    .hint{text-align:center;color:var(--muted);font-size:14px;margin:16px 0 0}
-    .controls{display:flex;justify-content:center;margin-top:26px}
-    button{
-      border:0;border-radius:999px;padding:18px 30px;font-size:18px;font-weight:800;cursor:pointer
-    }
-    #play{min-width:210px;background:var(--text);color:#0b0b0f}
-    #play.playing{background:var(--accent);color:#0b0b0f}
-    .status{
-      display:flex;justify-content:space-between;align-items:center;
-      gap:16px;color:var(--muted);font-size:13px
-    }
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03)}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-    @media (max-width:700px){
-      .app{padding-left:18px;padding-right:18px}
-      .card{padding:22px;border-radius:26px}
-      .meter-wrap{height:300px}
-      .side{padding:20px}
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070a10">
+<meta name="description" content="Scopri GLOW UP Music Studio: Urban, Pop e Indie / Rock, lo studio e i contatti.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GLOW UP">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<title>GLOW UP · Senti la differenza</title>
+<style>
+:root{--bg:#070a10;--panel:#101720;--text:#f5f7fb;--muted:#acb8ca;--blue:#148aff;--line:#ffffff21;--photo:url("https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/58bb659c-1657-4946-8046-986a6c61688d/sessione-produzione-musicale-regia-GLOW-UP-Music-Studio.jpg?format=1500w")}
+*{box-sizing:border-box}
+html{color-scheme:dark;scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 10% 0%,#12335e60,transparent 45%),var(--bg);color:var(--text);font-family:Poppins,system-ui,sans-serif;min-height:100dvh}
+button,a,input{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+button{font:inherit;cursor:pointer}
+button:disabled{cursor:default}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid #a4d5ff;outline-offset:5px}
+[hidden]{display:none!important}
+.wrap{width:min(1420px,100%);margin:auto;padding:0 clamp(18px,4vw,56px)}
+header{display:flex;gap:28px;align-items:center;justify-content:space-between;padding:24px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.brand b{font:800 22px Manrope,sans-serif;letter-spacing:.16em}
+.brand small{display:block;font-size:9px;letter-spacing:.34em;color:var(--muted);margin-top:3px}
+nav{display:flex;gap:8px}
+nav button{border:0;border-radius:12px;background:none;color:var(--muted);padding:14px 20px;font:700 17px Manrope,sans-serif;position:relative}
+nav button[aria-current=page]{color:var(--blue);background:#148aff0d}
+nav button[aria-current=page]:after{content:"";position:absolute;bottom:0;left:20px;right:20px;height:3px;border-radius:3px;background:var(--blue)}
+.headnote{font-size:12px;color:var(--muted)}
+.headnote span{color:var(--blue);font-size:23px;margin-right:7px}
+main{padding:30px 0 16px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:#69b7ff;margin:0 0 9px}
+h1,h2,h3{font-family:Manrope,sans-serif;letter-spacing:-.035em}
+h1{font-size:clamp(34px,4.4vw,64px);line-height:1.1;margin:0 0 10px;font-weight:800}
+.intro{margin:0;color:var(--muted);font-size:clamp(14px,1.4vw,18px)}
+.genres{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 24px}
+.genre{position:relative;isolation:isolate;overflow:hidden;height:115px;border:1px solid var(--line);border-radius:16px;background:#142233;text-align:left;padding:20px;color:white}
+.genre img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:saturate(.65);transition:transform .25s}
+.genre:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#020810e8,#03081125);z-index:-1}
+.genre:hover img{transform:scale(1.04)}
+.genre[aria-pressed=true]{border:2px solid var(--blue);box-shadow:0 0 24px #148aff20}
+.genre b{position:absolute;bottom:17px;left:20px;font:800 23px Manrope,sans-serif}
+.genre span{position:absolute;right:17px;bottom:18px;font-size:22px;color:#afdaff}
+.experience{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:22px;align-items:start}
+.player-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:0 0 13px}
+.player-title h2{font-size:23px;margin:0}
+.player-title span{font-size:13px;color:var(--muted)}
+.compare{position:relative;height:clamp(280px,31vw,405px);border:1px solid #9abada60;overflow:hidden;border-radius:22px;isolation:isolate;touch-action:pan-y;user-select:none;background:#142233;--split:50%}
+.compare .image{position:absolute;inset:0;background-image:linear-gradient(0deg,#02081095,#02081010),var(--photo);background-size:cover;background-position:center}
+.compare .original{filter:grayscale(.85) saturate(.3);clip-path:inset(0 calc(100% - var(--split)) 0 0)}
+.compare .polished{filter:saturate(1.05);clip-path:inset(0 0 0 var(--split))}
+.compare:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,#000b,transparent 38%);pointer-events:none}
+.side{position:absolute;top:47%;transform:translateY(-50%);z-index:2;pointer-events:none;font:800 clamp(30px,4.5vw,65px) Manrope,sans-serif;text-shadow:0 3px 25px #000}
+.before{left:8%}.after{right:8%}
+.caption{position:absolute;bottom:22px;z-index:2;pointer-events:none;font-size:12px;text-shadow:0 2px 6px #000}
+.caption.left{left:22px}.caption.right{right:22px}
+.divider{position:absolute;top:0;bottom:0;left:var(--split);width:3px;background:white;transform:translateX(-50%);z-index:3;pointer-events:none;box-shadow:0 0 18px #ffffff20}
+.handle{position:absolute;left:clamp(37px,var(--split),calc(100% - 37px));top:50%;transform:translate(-50%,-50%);border:0;width:74px;height:74px;background:white;color:#08121c;border-radius:50%;font:800 34px Manrope,sans-serif;display:grid;place-items:center;z-index:4;box-shadow:0 8px 30px #0007;pointer-events:none}
+.range{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;z-index:5;cursor:ew-resize;touch-action:pan-y}
+.compare:focus-within{outline:3px solid #a4d5ff;outline-offset:5px}
+.hint{text-align:center;color:var(--muted);font-size:13px;margin:13px 0 0}
+.audio-state{text-align:center;margin-top:15px}
+.primary{display:inline-flex;gap:9px;align-items:center;justify-content:center;border:1px solid #148aff;background:var(--blue);color:white;border-radius:999px;padding:15px 25px;font:800 16px Manrope,sans-serif;min-height:52px}
+.primary:disabled{background:#152c44;border-color:#3d658b;color:#c5d6e7}
+.audio-state p{font-size:11px;color:var(--muted);margin:8px 0 0}
+.panel{background:linear-gradient(140deg,#101b28,#0a1119);border:1px solid var(--line);border-radius:18px;padding:23px}
+.panel h2{font-size:23px;line-height:1.2;margin:0 0 14px}
+.panel h3{font-size:16px;margin:0 0 12px}
+.panel p{font-size:13px;line-height:1.7;color:var(--muted)}
+.panel hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.notes{padding:0;list-style:none;font-size:13px;color:#ced9e8}
+.notes li{padding:9px 0;display:flex;gap:10px;align-items:center}
+.notes li:before{content:"↗";color:var(--blue);font-size:20px}
+.text-action{border:0;background:none;padding:8px 0;color:#65b5ff;font:700 14px Manrope,sans-serif}
+footer{border-top:1px solid var(--line);padding:18px 0 24px;display:flex;gap:16px;justify-content:space-between;align-items:center;color:var(--muted);font-size:11px}
+footer button{background:none;border:1px solid var(--line);border-radius:999px;padding:10px 17px;color:var(--muted);font-size:11px;min-height:44px}
+.studio-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;margin-top:27px}
+.studio-copy h2{font-size:28px;margin:0 0 16px}
+.studio-copy p{color:var(--muted);line-height:1.8;font-size:14px}
+.services{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.services span{font-size:12px;border:1px solid var(--line);padding:10px 15px;border-radius:999px}
+.studio-photo{width:100%;height:315px;object-fit:cover;border-radius:20px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+figure{margin:0}
+.gallery img{width:100%;height:200px;object-fit:cover;border-radius:16px}
+figcaption{font-size:11px;color:var(--muted);padding:9px 2px}
+.contact-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;margin-top:28px}
+.contact-grid .panel{padding:32px}
+.contact-grid h2{font-size:28px}
+.address{font-style:normal;font-size:18px;line-height:1.7;margin:24px 0}
+.contact-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.secondary{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;padding:13px 20px;font-size:13px;min-height:48px}
+.qr-placeholder{width:145px;height:145px;border:1px dashed #557594;border-radius:16px;display:grid;place-items:center;color:#8da5bd;font:700 16px Manrope,sans-serif;text-align:center;background:repeating-linear-gradient(135deg,#ffffff02 0 7px,transparent 7px 14px);margin:23px 0}
+.contact-note{border-left:2px solid var(--blue);padding-left:16px;margin-top:22px}
+@media(min-width:1500px){main{padding-top:40px}.genre{height:140px}}
+@media(max-width:1000px){.headnote{display:none}.experience{grid-template-columns:minmax(0,1fr) 240px}.panel{padding:20px}nav button{padding:14px 15px}.brand b{font-size:18px}}
+@media(max-width:760px){header{flex-wrap:wrap;gap:16px;padding:18px 0}.brand{margin:auto}nav{width:100%;justify-content:center;border-top:1px solid var(--line);padding-top:10px}nav button{flex:1;font-size:15px;padding:12px 8px}.wrap{padding:0 18px}main{padding-top:25px}.genres{gap:8px;margin-top:22px}.genre{height:96px;padding:10px;border-radius:13px}.genre b{font-size:17px;left:11px;bottom:13px}.genre span{display:none}.experience,.studio-grid,.contact-grid{grid-template-columns:1fr}.compare{height:315px}.side{font-size:34px}.before{left:6%}.after{right:6%}.caption{font-size:10px;bottom:18px}.caption.left{left:12px}.caption.right{right:12px}.handle{width:64px;height:64px;left:clamp(32px,var(--split),calc(100% - 32px))}.experience{gap:24px}.panel h2{font-size:22px}.studio-photo{height:270px}.gallery{grid-template-columns:1fr;gap:18px}.gallery img{height:250px}.contact-grid .panel{padding:24px}footer{align-items:flex-start;flex-direction:column}.player-title span{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <body>
-  <main class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo"><img src="data:image/webp;base64,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" alt="Glow Up Music Studio"></div>
-        <div>
-          <div>GLOW UP</div>
-          <div class="tag">Music Studio</div>
-        </div>
-      </div>
-      <div class="pill"><span class="dot"></span> Kiosk demo</div>
-    </header>
-
-    <section class="hero">
-      <div class="card">
-        <h1>Senti la differenza.</h1>
-        <p class="sub">Premi play e trascina il cursore tra una versione “before” e una “after”.</p>
-
-        <div id="compare" class="meter-wrap" aria-label="Comparatore audio before after">
-          <div class="side before"><div><strong>BEFORE</strong><small>Più grezzo</small></div></div>
-          <div class="side after"><div><strong>AFTER</strong><small>Più definito</small></div></div>
-          <div id="divider" class="divider"></div>
-          <div id="handle" class="handle">↔</div>
-        </div>
-
-        <div class="hint">Trascina con un dito. A sinistra ascolti BEFORE, a destra AFTER.</div>
-
-        <div class="controls">
-          <button id="play" type="button">▶ Avvia demo</button>
-        </div>
-      </div>
-    </section>
-
-    <footer class="status">
-      <span>Prototype 01 · Audio generato in tempo reale</span>
-      <span id="mixLabel">50% BEFORE · 50% AFTER</span>
-    </footer>
-  </main>
-
+<div class="wrap">
+<header>
+<a class="brand" href="#ascolta" aria-label="GLOW UP Music Studio, inizio"><img src="data:image/webp;base64,UklGRkgXAABXRUJQVlA4WAoAAAAQAAAAnwAAnwAAQUxQSI8FAAABDkrbtpnRtE4683Fs6wdYe3t278zKWtu2Z96eX/DZWmlr27Y5VuM4krSSqnt9P11dlYhwBUlSU90eEjwPw4uE5Z95pgzPBq7hU7fOWWHKsLS90xTfBsIYug0fP3PJui27d+6RdrbFLJnZGm6r7pvL+2lKb5vq84qf+dRlx595//frlbrIbPvp48um9GGE9KpJs8SS5KiOwst/V6pQKt6qAUdThb9fLizOYq8QnQp8S7LrjFNvXquEKBdvuZJI/Y0IXdvFTuda69SMrlGBr4m9kHcvvOeHSojYlTcJcW1nQvxwz8JW7KSVTwUkpxa+j15Ht1g2CUHYpjEm65yaI52nuu/uq1+Kl5gkUeNEnc0i1ypbDNkb2VeXJF8Qme+1qhpIaDG68++KKTqTIpwz5m8ZrWTCkgOPXgjtyyZlSGh+gQNztMpVcvvG36pTKiR+y25Xqw5HLvygOqVKwi0iA2V8+hz+YHVKpcSDLfqeKj5X/Vkp0SgG0vy5Ug2XjoMfq5iiURDOmMcHpW/lG87/uRJ+eSoJceYnS9+kbXYo9GliULTwcLpWAfs/W9engi6lX86lGMZ/FZYqjrb5Ylxq6rjoQhTU1wsL01HPcU3ZFI0GcEayNH4HiOX2Oj4UdyE56yUf9jT4cabsB9zupJPieDb2RaqNts2ZhNVxb8y/VprRJRq2R2nddHuCGlYUC9pplpg6LpDIm3bqJEtILcdckJLREJSLYxL5DeB7fb6pFI2WcObrTPwkPnBfCL1rirZ5PoH6HA9HQV+1dE0bzanjXUPnbNLGNwN+r+VBTwe/9vNNc2VP1fKgq4OnGDRVtrzaSGebjLaJugb/WyrrLsJscONVWT4aL9O96FHahsPcKCDQVoMq/u2flksIhOJu973G4g3Vx+h/yPqGIpG+f5WIQchWP08aiY9FMYqoxaCBKoZfKpVRiDBr1a/BshDFOKICbd144H9lwSEiHOj5Df1RRBLtrbNbpNsv5RISofx8tye145WmaKDAmRW1I19eK6MRsTV35Dmx+hgkh1jma+XPx62xGJ+vkfV458+mhEZoXJaT6vyCKODR+dVZy/vKt/BIW7Iq8XiXw7Rxd8WzltOjgEinxaOAp0wbkbTN6fjBnrxtiojEmbdFSPoccaNSRiRiro+gT1p2RDGmaHHO1vjSwrSjk470+AquzcthibDXv9EeTDuy3vQsp0QBlbZoAy6N8qiyyxk4Hm/EEsr/b8tnkG2eZt6T900JldB8IJLr+jsyE9smh19HJtmwHMdFAZdOyHFmZInLcCa5BJt0kOsqt3BJ26wit2CTzeRubLKL3IlNdpB7sIngE3wZfCb4HOH7XsD3vYrvdwm+33UAfxfj+1+B738Zvv+1+NoF8LWr4GuX8tgbXLsevHZRcO3KBTrScjGydvkg1q9xHVm/BrJ+oZJ5WwRfvxq+fkl8/brw+sXxjSuoPS4DUx7buJYCHc5xQfT5Kp5xVa/SBzcurcUA37g+eOMiwY0rHeD58Mbl4hvXjHZcOH004+p9ePMS8M3rgDcvBt68InzzsuDNa4M3LxDcvMr+TRKV5Dlb93mpGS28eb3Y5kU7WkE/r5y0HHNR53n58HgN4PFCAOTVSFB3hwqMl4Se4xlsvC4Ux7368eJA5BVKOrlWL14maLxWrRSJt8Z/CY0XjHTspwmvGjxeOni8fgrwIj6uBy9iulYrVeaVhMfLiYzXdCEZwOOFVZRXN/XqqCivLknPqcZLjI7XWWVe7G6rUuXFfnFVtxzzvvq84p0p84prwst+b3q87Brx2k9Pltd+epzXXsN1ATobXxegXGNdgM601wVIf12FPlOWH3/6/d8aWVfhtw/sseUKrKugzLoUXYeNn9mxavOuHXuk5Tav7jDj2VWVdSngretBAFZQOCCSEQAAEEUAnQEqoACgAD5VJI5EI6IhF1nuJDgFRLYbgB3Jv+SQQBpAH4AP4B+AFsJDX+k61y9Xcv63+yP88/cX5bbF/UPwV+WHxm7MOkfMr5A/5P94/MD5y/6z/c+xH9MewF+n3SP8wX7CftV7tf+f/af3S/ah8Af89/zv/s9qX1E/7//1PYE/mH/F9NX9vPgy/sP/J/cT/6fIp+x///9gD0AOFh/sf4veFH+n6ZETfrlwO8Re+34n6gXs/d7wBfl39f75TU48DewB+X/lGeEz91/1PsCfzL+8+g39I+gP9C/03sE/zj+0f9v1vvZX+xPs6fsWkzl42MO1+KTnbnL8OD3gn9pQuEQCAN7v+b1mr8l3qbAR70/kMdYJgyAlmWds4HZWt+VbhN6v0891wfT77Y8i0cl4vgyjhr4i082AY+hO5J0BefzLu1X5Tqi4YAb4uvd1+BlDdHG8blmT2FXASQgeY0X+WDgu4b6WJxhNrrJ59zyBSgQrpDp9BHLgsBk8w+VNf1RJWkduXlBdsBUPOtnk2gDtoRtJ9k3eQ3DrIbYzm770v4d6HIP7Y7ySiBkslZBkT60PZJ29xc1uAFSUdKT9thMUTYRgf3vS5K/2r+tfbinBmOnoQ8ei1FtmBZVD4t4oV8j3AXH3Q6tc55hO/ItExJuSeRj2vUCjR5vvNuW7WZEitsn4Vvam/BsYLEitiCCzXBtdyc/3h7GIt+XhNDU3E2BAiT3nU3Z20VRgkbkfCSyAAPMRTlds8mOAcrQt1MkPNK8txBBf1XHqzHcObYk3AjuXdbxVv3M1g6o+zLOCEiBqrIVVtzScjncYqT/LgXhBMa/gUge/kguOKb8kfj+wC64RptuQRaCn8S2GUJb9kEV+e9gk/MxvX7kJ8nc2vyKjqcsXFPavZz72YVIj1EKSfdzfTZJ883dVyYm0sIU9hBQAk27hPK1pSajCJcrtbTJUjbYsbDrmSRaUnJnIKE6mbvjJxAVr2JZMAN+BQABSedqY3p+qkzhEm0B746olDAZO/R1ojRcKzHoHPiSo2utKsXjY9XKv1w/2gcqIp5XyJSP9+5XCw166/CaQKlbtbDmRwNVtgvYbE0KV8e0pNTYMwSznDCN4Tppjv3B/0gU5lTFRI3qE149a1ajBh34wipuNX2C6seAOkvSqgY97tMk7pB4zx8UfazSmsqLlNmRFayvhn2QBHWl1pC18XR/BEO0+fSlaQXXjSPi7S3NiX5Vp7ke8OEt4Xqu1AhujKwFsJZBRogZa4O0wxhJARFt/8XuYyOcwD1DTAfJtK8GzPihgrHllP5z1EfU/pV+LXCi2/ubQ+aufOs1PlFU+BT9aa5zb3nECZdpYAC3i+s0r9hIRi46xz58BhkoCpdHdAHvlQAAIVmQoDWpgL4vLDFYtD/auii1hCTR8Bd40uKjxOcSiornHF9j1XuzA/AG3IvNqULj2pMhNVaO6Nd9Oo0CBiQgiBKpJB9njW3CYiAg/FdVx+N+0ZmKHEXicq7EcvdHAw7U/CDobl+ZuDyeSbOOZAkCeYDAIuAKEsE5bBoy3PL6xOo4OSpl2jLCzi3FfBdYp59qFNxM8qykTfidgXkAyANV3/HdNBgDCo6StzQchSj5wUPF0iFL1mixf7EhVIjlLI+LgAod77Q2H11XlzpNBXnUc/bA/SbxQotVcV4uXPda7LfGsg7D8XHBMVaNjOwlQLRfWr5BLkqyN+K26jod1Fz4GJ5dftg+qqwFkOZOx8Fdw9IA0jEe0r+RHE8tz9XatX8OkYnmvh4kGQJhD2X7NGZyV9Q452aOOybp8aAbzJefPLVBVjwNIKMP28hp6woayC8HOrIL2lPBrl5w5poS+tW4dY55BgQ/BQkT7/u5ogJrLs8t4zYQKGx1V88pxLh2kaJ70lA2A6nICI8ZTzrbn3SLL1PwcA5aGoR9iCajOKHHeLdDSmuh/8P5Xv71WefPUU7K+JxP2I+yrO1dvo4cqHtrfakwe0DisZ+pe860OmgqSpsVsH1l3wY8741dIm0yIvWWaXXEM1RPzRljE5jVmrMnioM8K2QNeBEqt+//VjKvB2E+gG4JGCRoj1MaqpNo3+dXgYK+fcjyzmrUdBkMjp+P5fAuqA9Te+S5/8XCkMgBOJQ8e3d2aejfzN4q9YP9GKSld0uJ+xOuMEnLYb/rOf0RFuTYhAiJ6m/5Grzqmx3tgJyNHQBBYerMoAoApgiRqKaDo+RwxB03ExeVEyFieBbm1aRFzDvhaNOzgblqkeHX3gqDZmlhKMb/W/PlY1vVLvQuV8ScDHjjAsbkhNHw2HUqYaZGvXmLNmc732FdmqqNX+O+cKIxQmyIENBVpUHkwJZt8KAIBRDwOpoXIGkYfogPco5Q8im1im++COiDUYWHbeU0VcT/IaCOdUf9X7I84RQhSlZXZGop5nQMWlJiYWHodmGb9elqGfVL6vGsI8JG8jnGUpmTVoQAGeoj/bVK7loVomml8JFznMIa2xyWRu+BJL5aO9K33QPgnhFc5/cXbvvAGfDVhMehQrGSXsXbmdliBGU8ITjkJ/2eS5vplF5p/7R/2f/GSlAZbX5cMTzltYAEUFMD3XGwVSAWaddQZNnyNuhZ06bMviFU0jucJGULG5caI83t7Pv7nHHJI175BWt+VvjHjrM1zw6NxiYd+0exGvOAzCcM5DnZpZiH+yuC51bgTA+5jxHdB4TXJiFOUtQOs0h9STWPqUnlNrbRpmRK2kecp6d4xgMEguzS8mpBylql57pjx1S0+bmG3Aq+/FnizaHuPxOsBDvalzM6NG8iAxiYWa+ZZsKTG3wOXxrzZUBKCXyHJD6uwShjSUsu9AC3QDCjUR95UHa+3i31Xq1LDF8hOdrQL5L/o58hy46SOP5tWvmOZevQQLwOTLO9ijL+3vsTTV4odAcoKu3Q7XFJ1iiwIEqV6qkqvjsOq3Bsk8OQAv8QymeadCTQE1A+3XNsvz91l5csNAYx3G7Zo/zwCmllFt069r/L9I9KTn2PopLC321PHUuc64exwWJVPfOzkHiwm4Qo5DhLVcR75pcLMhsC3JcJInOcZQMJTT3/96bDBdV22vo83AZc1G2k9WiYgE5zJOJ9qkgWMmvfJ/U4P3K3OB5Vf7R/18jh2VGdQx55MQEUbHMcQQeG7jD+//3+vmzx0uh+2tWponwVu0h9BIQFB3n37CreJ0nWpHq0c03fCJxuIi1I2NaqXoUZ3pGBrnZt1Ve/mPAcS6sPNthPROHNwR6GKuorPPSCQkXtJn7go4GjAXAMH8Rei81kUlNPecn29AO0SbCWkw9ZvKfDPyAvW0EjeseRW99qc0uyKlW3d+J6fnRl2rq3A1sGObFT7uJFXMTTwqbnrQz+QBN5gFA76inVtCpHRopcDakGbh1EnxBRudDwUM2V80Rb9St6Q9eJlwWjHLmASOI/7/vzbOMSnC6ZoR0JXNxNiJXLKMpGnpaAiKv9P1IzATnXd1Kcesg0NYUwrtOoEYloZSxkjYbZ1P1ERwqEHWcR8iQ2k/g+vULhvzN9RDTba5MXfQIEcFTkmOSQCJ7nwvqOGRFKSoughZJozy6ktPp+ukqXJQI3E7y4/wiW810rjoHqfM4DNjSLKl6CmC6BeENxCbnEnkjsCtbK9A8r+bLyvDYCs/9//gypppYv9V9nHxzvW8qFyJ/6wZ4aQp2BmM0uVGrsbqMsV+ssrfmPT+Z5+l8sy3h43+QJ2LM6tbKLKXNyYoBuU12v24AWkH3eka337xFOB6SEz54pdZNz6fCPCQTn1wyZwojn3xHIbdK1s21Lc7J3L02ju2d35/m+V15JV2DbYfXvzS7/cxyHVAGf8cUoRqt4uXF81b2JucjRg6mAeZZrXYY123LF/vtMtEJUVF54SZenXvS2bmEiPN8kByDWH69nqm+mojmaEfxMIb+4MTg57vwk6xKtF2TyedCLp79P9e8egp8bMM9tWLunVry8ha3JF7hnxyE7A2qKBaArr1+el9GOukZola20izE5OZ8vYNy8ume8FRSUF6n5vjjNs1eJXIRwW5YVGMbJj7hWtigorm3nWfIY/FriygWdsUqA6hyM8YOyZndXAVMnphTwJ0YfVfNnr7vJ1iVqjw7RuuH5YB88FJOkwXcx+lBypfD0qfjHCYCTupG8V4MgyBEjl/UT6VLhrNlP1Rr/K3rrIN9bWjHDCsaoNH8AULBcFYi7cTAhqv1djcpfHcvxic4rv1xTZcyCbBI3N78HDwSH7eT03q9o1jJ2FX6B9wotr4GK7qbsSZ27eUzXF1+vnaleivgg0NlzO851Xi3LmyZynNWMV/cKiNFp6qBd3sVI0HWbSQf2SIZ7Y1uM+jqBn6HiwMxCCwA9kjXj+ToRWqvv5dtKTRKtion2GKKSB4Qu9GeC9qSJvMphO5Xw39k7Vn3YunA+/QtJX3/BY5YGDtwU3rOgGFDtONCyx1nJdeTXlaWjQhTOXzWpFJAaKyRfv8hl/gaTGYuaiRUqK+PgoHKd0LW2b0BRsATKOTMsK7CvI/5Ibp/MCuV7+y/6xyqhP11hgtOvmSOzs8IOCKLdaFTMIIlAQs7jUsnCh2f2chBgZuh7NZESPYoXCH0XVkwYxGAW+7RVJHfEqQ0tPuK4Gj7fb+3kaJnt0WHQSVvEjaG49ce5cg9mGWMrMbDamy/LPqzKmEYZEfVmBIGq/jpissQE74wa1SQlDqpqy/lIXfKyh2soUj36LmSj03xH3NsP/gt/kT980yBrM3hn9pXrDPrbWG3F37F7ux8Gyl1vnA/J/+NdPpEh0B01I8A3dMTvN5KcoDXdQ30AaRPX9Mo+1MLlJ4c1HT7W6e/9y/2p7GIjb6/TA/xw0qs968BMKbVVdfEt4cuI5FMhFXJRcosMbYpEFrX+PC76teVMmD0hI1PXupS+ovxhaFIxzOXpORf2fo9KuVFb91szMTYIB9Cgir1UNuC1M4qkHK5ltQY56LGk7xQPUK2yOI0cC7G0S7HF7jZth61eEtpwshb7ehEeEKNmUa8Dy/UPG/NaNTULTj//BIg1LY1x+9HSC/5SQCIiQeTgVGfxvWPZ0zy9KyyYCW+kiBxrlF/OzZfhCTVQoKRld5ZMRa/8bAPorbQAWR611VBH4njB9WkJPjsJBxSyYH4w9blsRTN28jRtz8Mo8sMtbmNklDmbD8aRR+7RX8joWeYv10aFRkpGYLrRs7c4OCqoP/DaXnG9dIbMo/DFPETdXdWvzWnEtGFmxfbV98PV2VMFIWt576WgGYcMJrXhsJAmkckXupmfD5rkyYqRk+/Ua2m/SYpNcjKD+Rg7al4YCrvcymPkrqvXxww8O8H20MUMlhWK3TKh04RvmsegTd/e0G/hlRHEYgl9BSylmHiu9iw8kMiAb/1AfmPhF9LhFW3A8rDGesyW9nxNPRtEiriRVb/bpI7RI6r2hAdB0EDwfZtj1K8JVi6p7+b9Uiw7DkUA4avWOfH9PEZQLIaxdL5aHcVt/zTVdP/uZu4KTHhdLtWA+ys0AmC07K2RP9s0iGAlmTE7E3viTEBn+mc53smAwegJM1O6pv0CJLr+T4+hNKm3y/6P2Jtytzc9NB52flQ5E24ji1BgkNJx0LFuWXuO+aULAGlz/JYf6DCJoWa5z31dmAc67xcyjFmbRMATg2fI0Rsqk0A9+zm9cEtwGX0VP81aAe5mzPXD1jTUKg8lP65iORNHL5uuJ6VIpvhqbRgObBnnboM2urZgH2FT6fm5iLjBI1ICrkJeRDFJMhZon4tI7SSil73jef8liqTcu2a69lgreZ8qgyS1ecmT9wucjEUUGINQVppodVxh33zWEXJMGRaTxweYZoTNdVqQYs0YElyML6LYafR0W4BtKhoAasRH2oT76pdrtRz8Mg6PGHGIz6jVwAbiijCnLm4HF69kvimuFmf+cyMsqQGTuS6iJzU4fh97cQHugohUi70mKgs93juPQYQAPSd/h5nOaZu8u6CfmjSQBlGZS/byES0fJVlGAAA==" alt="" width="48" height="48"><div><b>GLOW UP</b><small>MUSIC STUDIO</small></div></a>
+<nav aria-label="Sezioni"><button type="button" data-page="ascolta" aria-current="page" aria-controls="ascolta">Ascolta</button><button type="button" data-page="studio" aria-controls="studio">Lo studio</button><button type="button" data-page="contatti" aria-controls="contatti">Contatti</button></nav>
+<div class="headnote"><span aria-hidden="true">♫</span>La tua musica, il prossimo passo.</div>
+</header>
+<main>
+<section id="ascolta" aria-labelledby="listen-title">
+<p class="eyebrow">Tre generi. Un nuovo punto di ascolto.</p>
+<h1 id="listen-title">Senti la differenza.</h1>
+<p class="intro">Scegli il tuo genere e scopri il percorso dal primo take al brano.</p>
+<div class="genres" role="group" aria-label="Scegli il genere">
+<button class="genre" type="button" data-genre="urban" aria-pressed="true"><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/58bb659c-1657-4946-8046-986a6c61688d/sessione-produzione-musicale-regia-GLOW-UP-Music-Studio.jpg?format=1500w" alt=""><b>Urban</b><span aria-hidden="true">↗</span></button>
+<button class="genre" type="button" data-genre="pop" aria-pressed="false"><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/6748b856-b385-48c7-ac76-eabbdf7c3dff/registrazione-voce-studio-professionale-GLOW-UP-Music-Studio.jpg?format=1500w" alt=""><b>Pop</b><span aria-hidden="true">↗</span></button>
+<button class="genre" type="button" data-genre="indie" aria-pressed="false"><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/8c2d02d1-1789-4830-a76f-6e3d5aaf8c0b/regia-studio-registrazione-produzione-musicale-GLOW-UP-Music-Studio.jpg?format=1500w" alt=""><b>Indie / Rock</b><span aria-hidden="true">↗</span></button>
+</div>
+<div class="experience">
+<div>
+<div class="player-title"><h2 id="genre-title">Urban</h2><span id="genre-sub">Voce, ritmo e identità.</span></div>
+<div class="compare" id="compare">
+<div class="image original" aria-hidden="true"></div><div class="image polished" aria-hidden="true"></div>
+<div class="side before">PRIMA</div><div class="side after">DOPO</div>
+<div class="caption left">Il punto di partenza</div><div class="caption right">Il suono prende forma</div>
+<div class="divider" aria-hidden="true"></div><div class="handle" aria-hidden="true">↔</div>
+<input class="range" id="swipe" type="range" min="0" max="100" value="50" aria-label="Confronto Prima e Dopo" aria-describedby="swipe-hint" aria-valuetext="50% Prima, 50% Dopo">
+</div>
+<p class="hint" id="swipe-hint">Trascina con un dito per esplorare il Prima / Dopo.</p>
+<div class="audio-state"><button class="primary" type="button" disabled aria-describedby="audio-note">♫ Ascolto in preparazione</button><p id="audio-note">Puoi già provare lo swipe. Gli esempi audio arriveranno presto.</p></div>
+</div>
+<aside class="panel" aria-labelledby="about-listen">
+<h2 id="about-listen">Cosa cambia nel suono?</h2>
+<p id="genre-description">Una voce riconoscibile, un beat che respira e parole che arrivano. Il lavoro sul suono mette a fuoco il carattere del brano.</p>
+<hr><h3>Quando ascolterai, nota…</h3>
+<ul class="notes" id="genre-notes"><li>La presenza della voce</li><li>L'equilibrio tra basso e beat</li></ul>
+<hr><p>Ogni risultato parte da un'idea. Scopri dove può prendere forma.</p>
+<button class="text-action" type="button" data-page="studio">Entra nello studio →</button>
+</aside>
+</div>
+</section>
+<section id="studio" hidden aria-labelledby="studio-title">
+<p class="eyebrow">GLOW UP Music Studio · Colli del Tronto</p>
+<h1 id="studio-title">La tua musica prende forma.</h1>
+<p class="intro">Uno spazio reale per creare, registrare e dare voce alle idee.</p>
+<div class="studio-grid">
+<div class="studio-copy"><h2>Dall'idea al tuo suono.</h2><p>Hai una voce, un testo, una band o un brano da sviluppare? Al GLOW UP lavoriamo con te sulla direzione artistica, sulla registrazione e sul risultato finale.</p><p>Produzione, editing, mix e mastering si incontrano in un percorso costruito intorno al tuo progetto. Con la direzione di Nacor Fischetti, Music Project Manager.</p><div class="services"><span>Registrazione</span><span>Produzione</span><span>Mix & mastering</span></div><button class="primary" type="button" data-page="contatti">Parliamo della tua idea →</button></div>
+<figure><img class="studio-photo" src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/8c2d02d1-1789-4830-a76f-6e3d5aaf8c0b/regia-studio-registrazione-produzione-musicale-GLOW-UP-Music-Studio.jpg?format=1500w" alt="La regia di GLOW UP Music Studio" loading="lazy"><figcaption>La regia · dove le idee diventano suono.</figcaption></figure>
+</div>
+<div class="gallery">
+<figure><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/58bb659c-1657-4946-8046-986a6c61688d/sessione-produzione-musicale-regia-GLOW-UP-Music-Studio.jpg?format=1500w" alt="Una sessione di produzione nella regia GLOW UP" loading="lazy"><figcaption>Il lavoro sul progetto.</figcaption></figure>
+<figure><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/6748b856-b385-48c7-ac76-eabbdf7c3dff/registrazione-voce-studio-professionale-GLOW-UP-Music-Studio.jpg?format=1500w" alt="Una sessione di registrazione vocale GLOW UP" loading="lazy"><figcaption>La voce al centro.</figcaption></figure>
+<figure><img src="https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/d47c2dd0-9951-48f1-8952-37b750a128df/registrazione-vocale-vocal-booth-GLOW-UP-Music-Studio.jpg?format=1500w" alt="Il vocal booth GLOW UP" loading="lazy"><figcaption>Lo spazio per registrare.</figcaption></figure>
+</div>
+</section>
+<section id="contatti" hidden aria-labelledby="contact-title">
+<p class="eyebrow">Il prossimo passo lo scegli tu.</p>
+<h1 id="contact-title">Portaci la tua idea.</h1>
+<p class="intro">Anche solo per capire da dove iniziare.</p>
+<div class="contact-grid">
+<div class="panel"><h2>Vieni a conoscere lo studio.</h2><p>Siamo a Colli del Tronto, tra Ascoli Piceno e San Benedetto del Tronto.</p><address class="address">Via Salaria, 255/A · Primo piano<br>63079 Colli del Tronto (AP)</address><p>Ti accogliamo su appuntamento, per dedicare il tempo giusto al tuo progetto.</p><div class="contact-links"><a class="secondary" href="https://www.glowupmusicstudio.com/" target="_blank" rel="noopener noreferrer">Visita il sito ↗</a><a class="secondary" href="https://www.google.com/maps/search/?api=1&query=GLOW%20UP%20Music%20Studio%20Via%20Salaria%20255%2FA%20Colli%20del%20Tronto" target="_blank" rel="noopener noreferrer">Come arrivare ↗</a></div></div>
+<div class="panel"><p class="eyebrow">Dal negozio al tuo telefono</p><h2>Scrivici su WhatsApp.</h2><p>Il QR aprirà una chat con GLOW UP: potrai raccontarci cosa hai in mente e fare le tue domande.</p><div class="qr-placeholder" aria-label="QR WhatsApp non ancora disponibile">QR<br>in arrivo</div><button class="primary" disabled type="button">WhatsApp in preparazione</button><p class="contact-note">Il collegamento WhatsApp sarà disponibile a breve. Nel frattempo puoi conoscere lo studio sul sito.</p></div>
+</div>
+</section>
+</main>
+<footer><span>GLOW UP Music Studio · Un'idea può nascere ovunque.</span><button type="button" data-page="contatti">Portaci la tua idea ↗</button><a href="https://www.glowupmusicstudio.com/informativa-privacy" target="_blank" rel="noopener noreferrer">Privacy e informazioni legali ↗</a></footer>
+</div>
 <script>
 (() => {
-  const compare = document.getElementById('compare');
-  const divider = document.getElementById('divider');
-  const handle = document.getElementById('handle');
-  const playBtn = document.getElementById('play');
-  const mixLabel = document.getElementById('mixLabel');
-
-  let ctx = null;
-  let master = null;
-  let beforeGain = null;
-  let afterGain = null;
-  let isPlaying = false;
-  let timers = [];
-  let mix = .5;
-
-  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
-
-  function setMix(v){
-    mix = clamp(v, 0, 1);
-    const pct = mix * 100;
-    divider.style.left = pct + '%';
-    handle.style.left = pct + '%';
-    mixLabel.textContent = `${Math.round((1-mix)*100)}% BEFORE · ${Math.round(mix*100)}% AFTER`;
-
-    if (ctx && beforeGain && afterGain) {
-      const t = ctx.currentTime;
-      // equal-power crossfade
-      const a = Math.cos(mix * 0.5 * Math.PI);
-      const b = Math.cos((1.0 - mix) * 0.5 * Math.PI);
-      beforeGain.gain.cancelScheduledValues(t);
-      afterGain.gain.cancelScheduledValues(t);
-      beforeGain.gain.linearRampToValueAtTime(a, t + 0.03);
-      afterGain.gain.linearRampToValueAtTime(b, t + 0.03);
-    }
+  // Leave unset until the owner supplies the kiosk WhatsApp destination.
+  // Audio is intentionally absent; no synthetic demo or fake playback.
+  const genres = {
+    urban:{name:'Urban',sub:'Voce, ritmo e identità.',image:"https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/58bb659c-1657-4946-8046-986a6c61688d/sessione-produzione-musicale-regia-GLOW-UP-Music-Studio.jpg?format=1500w",description:'Una voce riconoscibile, un beat che respira e parole che arrivano. Il lavoro sul suono mette a fuoco il carattere del brano.',notes:['La presenza della voce',"L’equilibrio tra basso e beat"]},
+    pop:{name:'Pop',sub:'Una melodia che resta.',image:"https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/6748b856-b385-48c7-ac76-eabbdf7c3dff/registrazione-voce-studio-professionale-GLOW-UP-Music-Studio.jpg?format=1500w",description:'La voce racconta, gli strumenti la accompagnano. Produzione e mix danno spazio alla melodia e fanno emergere le emozioni.',notes:['La chiarezza della voce','Il respiro del ritornello']},
+    indie:{name:'Indie / Rock',sub:'L’energia della tua band.',image:"https://images.squarespace-cdn.com/content/v1/69032dbe2d26d91668a9cf6e/8c2d02d1-1789-4830-a76f-6e3d5aaf8c0b/regia-studio-registrazione-produzione-musicale-GLOW-UP-Music-Studio.jpg?format=1500w",description:'Chitarre, basso e batteria trovano il loro spazio senza perdere carattere. Il suono della band diventa un insieme che funziona.',notes:['Il dialogo tra gli strumenti','La forza della batteria']}
+  };
+  const compare=document.querySelector('#compare'), swipe=document.querySelector('#swipe');
+  function setSplit(value){
+    const v=Math.max(0,Math.min(100,Math.round(Number(value))));
+    swipe.value=v;
+    compare.style.setProperty('--split',v+'%');
+    swipe.setAttribute('aria-valuetext',v+'% immagine Prima, '+(100-v)+'% immagine Dopo');
   }
-
-  function updateFromPointer(e){
-    const r = compare.getBoundingClientRect();
-    setMix((e.clientX - r.left) / r.width);
+  let pointer=null;
+  function pointerValue(e){const r=compare.getBoundingClientRect();setSplit((e.clientX-r.left)/r.width*100);}
+  swipe.addEventListener('input',()=>setSplit(swipe.value));
+  swipe.addEventListener('pointerdown',e=>{if(e.button!==0)return;pointer=e.pointerId;swipe.setPointerCapture(e.pointerId);pointerValue(e);});
+  swipe.addEventListener('pointermove',e=>{if(pointer===e.pointerId)pointerValue(e);});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(type=>swipe.addEventListener(type,()=>pointer=null));
+  function selectGenre(key){
+    const g=genres[key];if(!g)return;
+    document.querySelectorAll('[data-genre]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.genre===key)));
+    document.querySelector('#genre-title').textContent=g.name;
+    document.querySelector('#genre-sub').textContent=g.sub;
+    document.querySelector('#genre-description').textContent=g.description;
+    document.querySelector('#genre-notes').replaceChildren(...g.notes.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+    compare.style.setProperty('--photo','url("'+g.image+'")');
+    setSplit(50);
   }
-
-  let dragging = false;
-  compare.addEventListener('pointerdown', e => {
-    dragging = true;
-    compare.setPointerCapture?.(e.pointerId);
-    updateFromPointer(e);
-  });
-  compare.addEventListener('pointermove', e => {
-    if (dragging) updateFromPointer(e);
-  });
-  compare.addEventListener('pointerup', () => dragging = false);
-  compare.addEventListener('pointercancel', () => dragging = false);
-
-  function createVoice(freq, start, duration, destination, polished){
-    const osc = ctx.createOscillator();
-    const env = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-
-    osc.type = polished ? 'sawtooth' : 'square';
-    osc.frequency.value = freq;
-
-    filter.type = 'lowpass';
-    filter.frequency.value = polished ? 5200 : 1400;
-    filter.Q.value = polished ? 0.8 : 2.4;
-
-    env.gain.setValueAtTime(0.0001, start);
-    env.gain.exponentialRampToValueAtTime(polished ? 0.18 : 0.12, start + 0.015);
-    env.gain.exponentialRampToValueAtTime(0.0001, start + duration);
-
-    osc.connect(filter);
-    filter.connect(env);
-    env.connect(destination);
-    osc.start(start);
-    osc.stop(start + duration + .05);
+  const pages=['ascolta','studio','contatti'];
+  function showPage(id,resetScroll=true){
+    if(!pages.includes(id))id='ascolta';
+    pages.forEach(page=>document.getElementById(page).hidden=page!==id);
+    document.querySelectorAll('nav [data-page]').forEach(b=>{if(b.dataset.page===id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    if(resetScroll)window.scrollTo({top:0,behavior:'instant'});
   }
-
-  function addKick(start, destination, polished){
-    const osc = ctx.createOscillator();
-    const g = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(polished ? 145 : 105, start);
-    osc.frequency.exponentialRampToValueAtTime(48, start + .12);
-    g.gain.setValueAtTime(polished ? .65 : .42, start);
-    g.gain.exponentialRampToValueAtTime(.001, start + .20);
-    osc.connect(g).connect(destination);
-    osc.start(start);
-    osc.stop(start + .22);
+  document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>{location.hash=b.dataset.page;showPage(b.dataset.page);}));
+  document.querySelectorAll('[data-genre]').forEach(b=>b.addEventListener('click',()=>selectGenre(b.dataset.genre)));
+  window.addEventListener('hashchange',()=>showPage(location.hash.slice(1)));
+  // Reset for the next visitor after two minutes of inactivity.
+  // Only kiosk-sized screens reset; phone visitors can read at their own pace.
+  let idleTimer;
+  function renewIdle(){
+    clearTimeout(idleTimer);
+    if(matchMedia('(min-width:900px)').matches)idleTimer=setTimeout(()=>{selectGenre('urban');location.hash='ascolta';showPage('ascolta');},120000);
   }
-
-  function scheduleLoop(){
-    if (!isPlaying) return;
-    const base = ctx.currentTime + .05;
-    const beat = .42;
-    const notes = [220, 261.63, 293.66, 329.63, 293.66, 261.63, 196, 220];
-
-    for(let i=0;i<8;i++){
-      const t = base + i*beat;
-      createVoice(notes[i], t, beat*.82, beforeGain, false);
-      createVoice(notes[i], t, beat*.90, afterGain, true);
-
-      if(i % 2 === 0){
-        addKick(t, beforeGain, false);
-        addKick(t, afterGain, true);
-      }
-    }
-
-    timers.push(setTimeout(scheduleLoop, beat*8*1000 - 120));
-  }
-
-  async function startAudio(){
-    if(!ctx){
-      ctx = new (window.AudioContext || window.webkitAudioContext)();
-      master = ctx.createGain();
-      master.gain.value = .42;
-
-      beforeGain = ctx.createGain();
-      afterGain = ctx.createGain();
-
-      // "After" gets subtle compression for audible contrast.
-      const comp = ctx.createDynamicsCompressor();
-      comp.threshold.value = -20;
-      comp.knee.value = 18;
-      comp.ratio.value = 3.5;
-      comp.attack.value = .005;
-      comp.release.value = .18;
-
-      beforeGain.connect(master);
-      afterGain.connect(comp).connect(master);
-      master.connect(ctx.destination);
-
-      setMix(mix);
-    }
-
-    if(ctx.state === 'suspended') await ctx.resume();
-
-    isPlaying = true;
-    playBtn.textContent = '■ Ferma demo';
-    playBtn.classList.add('playing');
-    scheduleLoop();
-  }
-
-  function stopAudio(){
-    isPlaying = false;
-    timers.forEach(clearTimeout);
-    timers = [];
-    if(master){
-      const t = ctx.currentTime;
-      master.gain.cancelScheduledValues(t);
-      master.gain.setValueAtTime(master.gain.value, t);
-      master.gain.linearRampToValueAtTime(.0001, t+.06);
-      setTimeout(() => { if(master) master.gain.value = .42; }, 90);
-    }
-    playBtn.textContent = '▶ Avvia demo';
-    playBtn.classList.remove('playing');
-  }
-
-  playBtn.addEventListener('click', async () => {
-    if(isPlaying) stopAudio();
-    else await startAudio();
-  });
-
-  setMix(.5);
+  ['pointerdown','keydown','scroll'].forEach(type=>window.addEventListener(type,renewIdle,{passive:true}));
+  window.addEventListener('resize',renewIdle);
+  showPage(location.hash.slice(1),false);selectGenre('urban');renewIdle();
 })();
 </script>
 </body>
